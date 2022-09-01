@@ -1,0 +1,42 @@
+astra:
+  api:
+    application-token: AstraCS:XnNFcYKTZrtzNQdgmkwHxvNJ:7434fa096f370d9cb946154d496de2f1474443e35468699d1025e3435c32c8d7
+    database-id: f4b9a818-e53a-40f4-aef1-c024f644948d
+    database-region: asia-south1
+    grpc:
+      enabled: true
+  cql:
+    enabled: true
+    download-scb:
+      # if disabled zip files must be in folder (path)
+      enabled: true
+      # Looking for files scb_dbid-dbregion.zip in folder (default is ~/.astra/scb)
+      # path: /tmp
+    driver-config:
+      basic:
+        session-keyspace: mydata
+        request:
+          timeout: 30s
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.1.106:10003/mailprocessordb?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8
+    username: sudhir
+    password: ENC(fIEwy2BmSBDfu8/OP60hflNTm//seUbT)
+    testOnBorrow: true
+    validationQuery: SELECT 1
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 30
+        order_inserts: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+jasypt:
+  encryptor:
+    password: ${ENCRYPTION_CODE}
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
